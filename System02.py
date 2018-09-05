@@ -94,13 +94,13 @@ class LedControlPanel(object):
         led.state = new_state
 
     def set_state_for_led_num(self, led_num, new_state):
-        self[num].state = new_state
+        self[led_num].state = new_state
 
     def set_state_for_all(self, new_state=HIGH):
         for led in self:
             self.set_state_for_led(led, new_state)
 
-
+# TODO: OLD API - must be reimplemented in a class
 def get_status_led_id(num):
     return 8 * (num // 5) + num % 5
 
