@@ -1,15 +1,11 @@
-import random
 import time
-import sys
 #from iothub_client import IoTHubClient, IoTHubClientError, IoTHubTransportProvider, IoTHubClientResult
 #from iothub_client import IoTHubMessage, IoTHubMessageDispositionResult, IoTHubError, DeviceMethodReturnValue
 import RPi.GPIO as GPIO
 #from shiftpi import HIGH, LOW, digitalWrite, delay, ALL, shiftRegisters, pinsSetup
 
-import shiftpi2
-from shiftpi2 import HIGH, LOW, ALL
-
-import dist_sensor
+from shift_595 import shiftpi2
+from shift_595.shiftpi2 import HIGH, LOW
 
 #import shiftpi as STATUS_LEDS
 #import shiftpi as DIAG_LEDS
