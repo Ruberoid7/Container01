@@ -21,25 +21,19 @@ errors_leds_controller = led_control.make_led_panel(controller_config=settings.S
 # print('leds: ', len(status_leds_controller))
 
 
-status_leds_controller[0] = led_control.LOW
+#status_leds_controller[0] = led_control.LOW
 
 mux = dist_sensor.make_mux()
 
 print(mux)
-
-mux.measure_distance_on_sensor_num(0)
-
+mux.measure_all_sensors()
+# for sensor in mux:
+#     print(sensor)
+#     mux.measure_distance_on_sensor(sensor)
 print(mux)
 
-# GPIO.output(15, 1)
-# GPIO.output(16, 1)
-# GPIO.output(18, 1)
-# GPIO.output(22, 1)
-# 
-# GPIO.output(11, 0)
-# sleep(20)
+# mux.measure_distance_on_sensor_num(0)
+
+# print(mux)
 
 
-
-# mux.select_sensor(0)
-# mux.send_trigger(pulse_length=5)

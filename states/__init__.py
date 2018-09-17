@@ -32,3 +32,6 @@ class State(object):
         Returns the name of the State.
         """
         return self.__class__.__name__
+
+    def is_error(self):
+        pass

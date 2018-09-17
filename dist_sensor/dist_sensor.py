@@ -34,7 +34,12 @@ class DistSensor(object):
         return 'Sensor({}) : {} ({})'.format(self._number, self.level, self.distance)
 
     def __str__(self):
-        return ' Sensor {} : {}({}) | '.format(self._number + 1, str(self._current_state),  self.distance)
+        dist_str = str(self.distance)
+        if self.distance > settings.HIGH_DISTANCE_LIMIT:
+            dist_str = 'TO HIGH'
+        elif self.distance < settings.LOW_DISTANCE_LIMIT:
+            dist_str = 'TO LOW'
+        return ' Sensor {} : {}({})'.format(self._number + 1, str(self._current_state),  dist_str)
 
     # def __call__(self, *args, **kwargs):
 
@@ -48,6 +53,10 @@ class DistSensor(object):
             return self._prev_state.level
         else:
             return self._current_state.level
+
+    @property
+    def is_error(self):
+        return self._current_state.is_error()
 
     def _select_sensor(self):
         self._mux.select_sensor(self._number)
@@ -128,6 +137,7 @@ class MUX(object):
         selector_config['PIN_ECHO'] = get_config_value('PIN_ECHO', selector_config)
 
         self._selector_config = selector_config
+        self.last_scan_time = 0.0
 
         is_init_hardware and self.init_ports(selector_config)
 
@@ -210,11 +220,13 @@ class MUX(object):
     def measure_distance_on_sensor_num(self, num):
         self[num].measure_distance()
 
-    @staticmethod
-    def measure_distance_on_sensor(sensor):
+    def measure_distance_on_sensor(self, sensor):
         sensor.measure_distance()
 
     def measure_all_sensors(self, timeout=0.1):
+        # do not scan to often
+        if time.time() - self.last_scan_time < settings.SCANNING_INTERVAL:
+            return
         for sensor in self:
             self.measure_distance_on_sensor(sensor)
             time.sleep(timeout)

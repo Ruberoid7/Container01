@@ -2,12 +2,18 @@ DEBUG = False
 
 DEFAULT_NUMBER_OF_SENSORS = 10
 DEFAULT_IS_INIT_HARDWARE = True
-DEFAULT_PULSE_LENGTH = 0.00001
-DEFAULT_DIST_SENSOR_TIMEOUT = 4
+DEFAULT_PULSE_LENGTH = 0.00001      # sensor trigger pulse width
+DEFAULT_DIST_SENSOR_TIMEOUT = 0.01  # timeout to wait for sensor data. error if exceeded
+
+# levels of distance (HIGH_DISTANCE_LIMIT -> LEVEL_1_DISTANCE -> LEVEL_2_DISTANCE -> LOW_DISTANCE_LIMIT)
 LOW_DISTANCE_LIMIT = 30
 HIGH_DISTANCE_LIMIT = 250
 LEVEL_1_DISTANCE = 100
 LEVEL_2_DISTANCE = 50
+
+SCANNING_INTERVAL = 1               # timeout between all sensors scans
+INTER_SENSOR_INTERVAL = 0.2         # timeout between sensors polling - to reduce noise
+DISPLAY_UPDATE_INTERVAL = 1                #timeout between display updates
 
 # INDICATION line settings
 PIN_CH_A = 29  # 5

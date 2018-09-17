@@ -30,7 +30,7 @@ class LedControl(object):
         self._last_state = self._current_state = state
 
     def __repr__(self):
-        return self.__class__.__name__ + " # " + str(self.uid) + ' : ' + repr(self.state) + ' | '
+        return self.__class__.__name__ + " # " + str(self.uid + 1) + ' : ' + repr(self.state)
 
     @property
     def state(self):
